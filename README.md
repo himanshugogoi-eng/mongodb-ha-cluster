@@ -34,8 +34,9 @@ Step-by-Step Setup
 
 3. With authentication disabled in the configuration file create an admin user for mongodb.
 First stop the mongod service and start it with --no-auth option:
- mongod --port 27017 --dbpath /var/lib/mongo --noauth
-	
+ ```bash
+	sudo mongod --port 27017 --dbpath /var/lib/mongo --noauth
+ ```	
 4. Create the admin user in mongodb:
 	> use admin
 	> db.createUser(
