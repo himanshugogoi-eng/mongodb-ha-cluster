@@ -29,7 +29,8 @@ Step-by-Step Setup
 
 1. Install MongoDB on All Nodes. Add the repository to the repo file as obtained from the mongodb official site.	
 ```bash
-	sudo dnf install -y mongodb-enterprise```
+	sudo dnf install -y mongodb-enterprise
+```
 
 3. With authentication disabled in the configuration file create an admin user for mongodb.
 First stop the mongod service and start it with --no-auth option:
