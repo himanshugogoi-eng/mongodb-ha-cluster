@@ -53,7 +53,8 @@ First stop the mongod service and start it with --no-auth option:
 6. Create a cluster admin user for the cluster as well in the same way.
 
 7. Set hostnames on all the three nodes as per your choice. Here I am using the following hostnames:
-	```172.31.4.37 mongo-primary
+	```
+           172.31.4.37 mongo-primary
 	   172.31.6.134 mongo-secondary-1
 	   172.31.7.125 mongo-secondary-2
 	```
