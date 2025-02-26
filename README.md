@@ -38,7 +38,8 @@ First stop the mongod service and start it with --no-auth option:
 	sudo mongod --port 27017 --dbpath /var/lib/mongo --noauth
  ```	
 4. Create the admin user in mongodb:
-	> use admin
+```bash	
+ > use admin
 	> db.createUser(
 	{
 		user: "superAdmin",
@@ -46,7 +47,7 @@ First stop the mongod service and start it with --no-auth option:
 		roles: [ { role: "root", db: "admin" } ]	
 	}
 	)
-	
+ ```	
 5. Now restart the mongod service with authentication on.
 
 6. Create a cluster admin user for the cluster as well in the same way.
