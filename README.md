@@ -1,5 +1,5 @@
 #MongoDB High Availability (HA) Cluster Setup
-==============================================
+
 ##Overview
 ----------
 This documentation outlines the setup of a high-availability (HA) MongoDB cluster with automatic failover. The cluster consists of multiple replica set nodes(3), ensuring redundancy and minimal downtime.
