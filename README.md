@@ -38,9 +38,9 @@ First stop the mongod service and start it with --no-auth option:
 	sudo mongod --port 27017 --dbpath /var/lib/mongo --noauth
  ```	
 4. Create the admin user in mongodb:
-```bash	
- > use admin
-	> db.createUser(
+```javascript	
+ 	 use admin
+	 db.createUser(
 	{
 		user: "superAdmin",
 		pwd: "Admin@123!",
