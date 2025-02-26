@@ -112,12 +112,12 @@ Initiate the replica set:
 ```
 
 **Advanced Configuration Considerations
-	Read Preference Modes
+Read Preference Modes
 	Configure application connection strings for optimal read distribution:
-
-	`mongodb://appUser:AppPassword456!@mongo-primary:27017,mongo-secondary-1:27017,mongo-secondary-2:27017/applicationDB?replicaSet=rs0&readPreference=secondaryPreferred`
-	
-	Write Concern Levels
+```bash
+	mongodb://appUser:AppPassword456!@mongo-primary:27017,mongo-secondary-1:27017,mongo-secondary-2:27017/applicationDB?replicaSet=rs0&readPreference=secondaryPreferred
+```	
+Write Concern Levels
 	Ensure data durability with appropriate write concerns:
  ```javascript
  	db.importantColl.insert(
