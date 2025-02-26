@@ -1,11 +1,9 @@
 # MongoDB High Availability (HA) Cluster Setup
 
 ## Overview
-----------
 This documentation outlines the setup of a high-availability (HA) MongoDB cluster with automatic failover. The cluster consists of multiple replica set nodes(3), ensuring redundancy and minimal downtime.
 
 ## Architecture
---------------
 The HA cluster is designed with the following components:
 
 	Primary Node: Handles all write operations.
@@ -15,7 +13,6 @@ The HA cluster is designed with the following components:
 	Load Balancer (Optional): Directs traffic based on availability.
 
 ## Prerequisites
----------------
 	*Bare metal or cloud servers running Red Hat Enterprise Linux 9.5.
 
 	*MongoDB version: 8.0.5 Enterprise
@@ -25,7 +22,6 @@ The HA cluster is designed with the following components:
 	*Firewall rules allowing communication between nodes.
 
 ## Step-by-Step Setup
---------------------
 1. Install MongoDB on All Nodes. Add the repository to the repo file as obtained from the mongodb official site.	
 ```bash
 	sudo dnf install -y mongodb-enterprise
@@ -111,7 +107,6 @@ Initiate the replica set:
 ```
 
 ## Advanced Configuration Considerations
-----------------------------------------
 ### Read Preference Modes
 	Configure application connection strings for optimal read distribution:
 ```bash
@@ -127,7 +122,6 @@ Initiate the replica set:
 ```
 
 ## Monitoring & Maintenance
---------------------------
 Check logs: 
 ```bash
 	sudo journalctl -u mongod --no-pager | tail
@@ -146,7 +140,6 @@ Size the oplog appropriately for recovery windows:
 ```
 
 ### Backup Procedures
-----------------------
 MongoDB Consistent Snapshots:
 ```bash
 	mongodump --host rs0/mongo-primary:27017,mongo-secondary-1:27017 --ssl --authenticationDatabase admin --username backupUser --archive --oplog > backup-$(date +%F).archive
@@ -157,7 +150,6 @@ Restoration Process
 ```
 
 ### Performance Optimization
------------------------------
 Index Management
 Create compound indexes for common query patterns:
 ```javascript
@@ -172,7 +164,6 @@ sh.enableSharding("bigDataDB");
 sh.shardCollection("bigDataDB.logs", { _id: "hashed" });
 ```
 ## Conclusion
---------------
 This comprehensive deployment strategy ensures 99.95% availability for MongoDB clusters through automated failover, robust replication, and proper security controls. The three-node architecture balances cost and reliability while providing a foundation for scaling to larger deployments. Regular maintenance including software updates, backup validations, and performance tuning remains crucial for long-term cluster health34.
 
 For production environments, consider enhancing the base configuration with:
