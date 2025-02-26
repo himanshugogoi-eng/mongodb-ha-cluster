@@ -1,4 +1,4 @@
-#MongoDB High Availability (HA) Cluster Setup
+# MongoDB High Availability (HA) Cluster Setup
 
 ##Overview
 ----------
