@@ -28,7 +28,7 @@ Firewall rules allowing communication between nodes.
 Step-by-Step Setup
 
 1. Install MongoDB on All Nodes. Add the repository to the repo file as obtained from the mongodb official site.
-       ` sudo dnf install -y mongodb-enterprise `
+	sudo dnf install -y mongodb-enterprise
 
 2. With authentication disabled in the configuration file create an admin user for mongodb.
 First stop the mongod service and start it with --no-auth option:
@@ -44,16 +44,16 @@ First stop the mongod service and start it with --no-auth option:
 	}
 	)
 	
-3. Now restart the mongod service with authentication on.
+4. Now restart the mongod service with authentication on.
 
-4. Create a cluster admin user for the cluster as well in the same way.
+5. Create a cluster admin user for the cluster as well in the same way.
 
-5. Set hostnames on all the three nodes as per your choice. Here I am using the following:
+6. Set hostnames on all the three nodes as per your choice. Here I am using the following:
 	172.31.4.37 mongo-primary
 	172.31.6.134 mongo-secondary-1
 	172.31.7.125 mongo-secondary-2
 
-6. Create a key file for authentication and distribute it among the servers.
+7. Create a key file for authentication and distribute it among the servers.
 	# mkdir /etc/mongodb
 	# openssl rand -base64 756 > /etc/mongodb/keyfile
 	# chmod 400 /etc/mongodb/keyfile
@@ -61,7 +61,7 @@ First stop the mongod service and start it with --no-auth option:
 	# rsync -avzP /etc/mongodb/keyfile mongo-secondary-1:/etc/mongodb/
 	# rsync -avzP /etc/mongodb/keyfile mongo-secondary-2:/etc/mongodb/
 
-7. Configure Replica Set
+8. Configure Replica Set
 
 Edit MongoDB configuration file (/etc/mongod.conf) on all nodes:
 	# vi /etc/mongod.conf
@@ -80,7 +80,7 @@ Restart MongoDB service:
 
 sudo systemctl restart mongod
 
-8. Initiate the Replica Set
+9. Initiate the Replica Set
 
 On the primary node, run the MongoDB shell:
 
@@ -97,7 +97,7 @@ rs.initiate({
   ]
 });
 
-9. Verify the Replica Set Status
+10. Verify the Replica Set Status
 
 	> rs.status();
 
