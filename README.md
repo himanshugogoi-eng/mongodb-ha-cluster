@@ -1,32 +1,31 @@
-MongoDB High Availability (HA) Cluster Setup
-
-Overview
-
+#MongoDB High Availability (HA) Cluster Setup
+==============================================
+##Overview
+----------
 This documentation outlines the setup of a high-availability (HA) MongoDB cluster with automatic failover. The cluster consists of multiple replica set nodes(3), ensuring redundancy and minimal downtime.
 
-Architecture
-
+##Architecture
+--------------
 The HA cluster is designed with the following components:
 
-Primary Node: Handles all write operations.
+	Primary Node: Handles all write operations.
 
-Secondary Nodes: Replicates data from the primary node.
+	Secondary Nodes: Replicates data from the primary node.
 
-Load Balancer (Optional): Directs traffic based on availability.
+	Load Balancer (Optional): Directs traffic based on availability.
 
-Prerequisites
+##Prerequisites
+---------------
+	*Bare metal or cloud servers running Red Hat Enterprise Linux 9.5.
 
-Bare metal or cloud servers running Red Hat Enterprise Linux 9.5.
+	*MongoDB version: 8.0.5 Enterprise
 
-MongoDB version: 8.0.5 Enterprise
+	*SSH access and sudo privileges.(Passwordless ssh enabled between the nodes.)
 
-SSH access and sudo privileges.(Passwordless ssh enabled between the nodes.)
+	*Firewall rules allowing communication between nodes.
 
-
-Firewall rules allowing communication between nodes.
-
-Step-by-Step Setup
-
+##Step-by-Step Setup
+--------------------
 1. Install MongoDB on All Nodes. Add the repository to the repo file as obtained from the mongodb official site.	
 ```bash
 	sudo dnf install -y mongodb-enterprise
@@ -111,13 +110,14 @@ Initiate the replica set:
  	rs.status();
 ```
 
-**Advanced Configuration Considerations
-Read Preference Modes
+##Advanced Configuration Considerations
+----------------------------------------
+###Read Preference Modes
 	Configure application connection strings for optimal read distribution:
 ```bash
 	mongodb://appUser:AppPassword456!@mongo-primary:27017,mongo-secondary-1:27017,mongo-secondary-2:27017/applicationDB?replicaSet=rs0&readPreference=secondaryPreferred
 ```	
-Write Concern Levels
+###Write Concern Levels
 	Ensure data durability with appropriate write concerns:
  ```javascript
  	db.importantColl.insert(
@@ -125,8 +125,9 @@ Write Concern Levels
 	{ writeConcern: { w: "majority", wtimeout: 5000 } }
 	)
 ```
-Monitoring & Maintenance
 
+##Monitoring & Maintenance
+--------------------------
 Check logs: 
 ```bash
 	sudo journalctl -u mongod --no-pager | tail
@@ -144,7 +145,8 @@ Size the oplog appropriately for recovery windows:
 	db.adminCommand({replSetResizeOplog: 1, size: 204800});
 ```
 
-Backup Procedures
+###Backup Procedures
+--------------------
 MongoDB Consistent Snapshots:
 ```bash
 	mongodump --host rs0/mongo-primary:27017,mongo-secondary-1:27017 --ssl --authenticationDatabase admin --username backupUser --archive --oplog > backup-$(date +%F).archive
@@ -153,7 +155,9 @@ Restoration Process
 ```bash
 	mongorestore --host rs0/mongo-new-primary:27017 --ssl --authenticationDatabase admin --username restoreUser --oplogReplay --archive=backup-2025-02-21.archive
 ```
-Performance Optimization
+
+###Performance Optimization
+---------------------------
 Index Management
 Create compound indexes for common query patterns:
 ```javascript
@@ -167,7 +171,8 @@ sh.addShard("rs0/mongo-primary:27017");
 sh.enableSharding("bigDataDB");
 sh.shardCollection("bigDataDB.logs", { _id: "hashed" });
 ```
-Conclusion
+##Conclusion
+------------
 This comprehensive deployment strategy ensures 99.95% availability for MongoDB clusters through automated failover, robust replication, and proper security controls. The three-node architecture balances cost and reliability while providing a foundation for scaling to larger deployments. Regular maintenance including software updates, backup validations, and performance tuning remains crucial for long-term cluster health34.
 
 For production environments, consider enhancing the base configuration with:
