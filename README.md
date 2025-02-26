@@ -6,20 +6,20 @@ This documentation outlines the setup of a high-availability (HA) MongoDB cluste
 ## Architecture
 The HA cluster is designed with the following components:
 
-	Primary Node: Handles all write operations.
+*Primary Node: Handles all write operations.
 
-	Secondary Nodes: Replicates data from the primary node.
+*Secondary Nodes: Replicates data from the primary node.
 
-	Load Balancer (Optional): Directs traffic based on availability.
+*Load Balancer (Optional): Directs traffic based on availability.
 
 ## Prerequisites
-	*Bare metal or cloud servers running Red Hat Enterprise Linux 9.5.
+*Bare metal or cloud servers running Red Hat Enterprise Linux 9.5.
 
-	*MongoDB version: 8.0.5 Enterprise
+*MongoDB version: 8.0.5 Enterprise
 
-	*SSH access and sudo privileges.(Passwordless ssh enabled between the nodes.)
+*SSH access and sudo privileges.(Passwordless ssh enabled between the nodes.)
 
-	*Firewall rules allowing communication between nodes.
+*Firewall rules allowing communication between nodes.
 
 ## Step-by-Step Setup
 1. Install MongoDB on All Nodes. Add the repository to the repo file as obtained from the mongodb official site.	
