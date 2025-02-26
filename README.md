@@ -34,8 +34,7 @@ sudo dnf install -y mongodb-enterprise
 
 2. With authentication disabled in the configuration file create an admin user for mongodb.
 First stop the mongod service and start it with --no-auth option:
-
-	# mongod --port 27017 --dbpath /var/lib/mongo --noauth
+ mongod --port 27017 --dbpath /var/lib/mongo --noauth
 	
 3. Create the admin user in mongodb:
 	> use admin
