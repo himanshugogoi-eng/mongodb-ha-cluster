@@ -28,13 +28,14 @@ Firewall rules allowing communication between nodes.
 Step-by-Step Setup
 
 1. Install MongoDB on All Nodes. Add the repository to the repo file as obtained from the mongodb official site.	
- 	> sudo dnf install -y mongodb-enterprise
+```bash
+	sudo dnf install -y mongodb-enterprise```
 
-2. With authentication disabled in the configuration file create an admin user for mongodb.
+3. With authentication disabled in the configuration file create an admin user for mongodb.
 First stop the mongod service and start it with --no-auth option:
  mongod --port 27017 --dbpath /var/lib/mongo --noauth
 	
-3. Create the admin user in mongodb:
+4. Create the admin user in mongodb:
 	> use admin
 	> db.createUser(
 	{
@@ -44,16 +45,16 @@ First stop the mongod service and start it with --no-auth option:
 	}
 	)
 	
-4. Now restart the mongod service with authentication on.
+5. Now restart the mongod service with authentication on.
 
-5. Create a cluster admin user for the cluster as well in the same way.
+6. Create a cluster admin user for the cluster as well in the same way.
 
-6. Set hostnames on all the three nodes as per your choice. Here I am using the following:
+7. Set hostnames on all the three nodes as per your choice. Here I am using the following:
 	172.31.4.37 mongo-primary
 	172.31.6.134 mongo-secondary-1
 	172.31.7.125 mongo-secondary-2
 
-7. Create a key file for authentication and distribute it among the servers.
+8. Create a key file for authentication and distribute it among the servers.
 	# mkdir /etc/mongodb
 	# openssl rand -base64 756 > /etc/mongodb/keyfile
 	# chmod 400 /etc/mongodb/keyfile
@@ -61,7 +62,7 @@ First stop the mongod service and start it with --no-auth option:
 	# rsync -avzP /etc/mongodb/keyfile mongo-secondary-1:/etc/mongodb/
 	# rsync -avzP /etc/mongodb/keyfile mongo-secondary-2:/etc/mongodb/
 
-8. Configure Replica Set
+9. Configure Replica Set
 
 Edit MongoDB configuration file (/etc/mongod.conf) on all nodes:
 	# vi /etc/mongod.conf
